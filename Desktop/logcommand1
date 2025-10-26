@@ -1,11 +1,10 @@
 echo "USAGE STATEMENTS:"
 echo ""
+echo "GENERAL COMMAND: --lcheck is the command to showcase general system logs"
 echo ""
-echo "GENERAL USAGE: --lcheck is the command to showcase general system logs"
+echo "FORMAT SIZE COMMAND": --lchecks is the command to showcase system logs formatted by data size"
 echo ""
-echo "DATA USAGE 1: --lchecks is the command to showcase system logs formatted by data size"
-echo ""
-echo "DATA USAGE 2: --checkd is the command to showcase system logs formatted by timestamp"
+echo "FORMAT TIME COMMAND: --checkd is the command to showcase system logs formatted by timestamp"
 echo ""
 
 
