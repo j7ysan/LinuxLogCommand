@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Requires creation of 'logservice.log' in '/var/log' from the user in advance."
+
 CONFIG_FILE="~/app/resources/log.cfg"
 LOG_FILE="~/var/log/logservice.log"
 
