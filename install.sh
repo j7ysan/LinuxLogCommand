@@ -13,22 +13,6 @@ CONFIG_INSTALL_PATH="/etc/log-rotation"
 CONFIG_FILE_NAME="log.cfg"
 CONFIG_FILE_PATH="$CONFIG_INSTALL_PATH/$CONFIG_FILE_NAME"
 
-# Basic USAGE
-echo "Program requires BATS to use"
-echo "To install BATS for macOS: brew install bats-core"
-echo "To install BATS for Linux: sudo apt install bats"
-echo " "
-echo "Program USAGE: bats log-rotation.bats"
-echo "USAGE: "
-echo "-c, --config FILE - Configuration file path"
-echo "-d, --dir DIR - Log directory to process"
-echo "-l, --log FILE - Status log file path"
-echo "-u, --user USER - Allowed user"
-echo "-t, --threshold MB - Size warning threshold in MB"
-echo "-r, --retention DAYS - Zip retention period in days"
-echo "-D, --delegate USER - Delegated user who can also run this script"
-echo "-h, --help - Show this help message"
-
 # Check if running as root
 if [[ $EUID -ne 0 ]]; then
    echo "Error: This script must be run as root (use sudo)"
