@@ -35,20 +35,30 @@ mkdir -p "$LOG_DIR"
 echo "Copying system files..."
 cp -r "./app/deployment/etc/" /
 
-# Copy script
-echo "Installing log rotation script..."
-cp "./app/src/log-rotate.sh" /usr/local/bin/
-chmod +x /usr/local/bin/log-rotate.sh
+# Copy scripts
+echo "Installing log rotation scripts..."
+cp "./app/src/util.sh" /usr/local/bin/
+cp "./app/src/functions.sh" /usr/local/bin/
+cp "./app/src/log-rotation.sh" /usr/local/bin/
+chmod +x /usr/local/bin/util.sh
+chmod +x /usr/local/bin/functions.sh
+chmod +x /usr/local/bin/log-rotation.sh
 
 # Copy config if doesn't exist
-if [[ ! -f "/etc/usr/local/bin/log.cfg" ]]; then
-    cp "./app/resources/log.cfg" "/etc/usr/local/bin/log.cfg"
+CONFIG_INSTALL_PATH="/course_project/log.cfg"
+if [[ ! -f "$CONFIG_INSTALL_PATH" ]]; then
+    cp "./app/resources/log.cfg" "$CONFIG_INSTALL_PATH"
 fi
+
+# Create log directory for status log
+mkdir -p /var/log
 
 # Set ownership
 chown -R "$ZIP_USER:$ZIP_USER" "$LOG_DIR"
-chown "$ZIP_USER:$ZIP_USER" /usr/local/bin/log-rotate.sh
-chown "$ZIP_USER:$ZIP_USER" /usr/local/bin/log.cfg
+chown "$ZIP_USER:$ZIP_USER" "$CONFIG_INSTALL_PATH"
+chown "$ZIP_USER:$ZIP_USER" /usr/local/bin/util.sh
+chown "$ZIP_USER:$ZIP_USER" /usr/local/bin/functions.sh
+chown "$ZIP_USER:$ZIP_USER" /usr/local/bin/log-rotation.sh
 
 # Reload and start systemd timer
 echo "Enabling systemd timer..."
