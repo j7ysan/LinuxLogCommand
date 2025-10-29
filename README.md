@@ -22,6 +22,7 @@ The installation process is automated using the `install.sh` script, which perfo
 
 1. Clone or download this repository.
 2. Run: `sudo ./install.sh`.
+3. Verify installation: `sudo bats test_install.bats`
 
 ### Configuration
 There’s a file called log.cfg where you set things like:

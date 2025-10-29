@@ -37,12 +37,20 @@ mkdir -p "$LOG_DIR"
 echo "Copying system files..."
 cp -r "$SRC_DEPLOYMENT_DIR" /
 
+# Ensure install path exists
+mkdir -p "$INSTALL_PATH"
+
 # Copy scripts
 echo "Installing log rotation scripts..."
 cp "$SRC_CODE_DIR"*.sh "$INSTALL_PATH/"
 chmod +x "$INSTALL_PATH/"*.sh
 
-# Copy config
+# Ensure config path exists and copy config
+# Remove if it exists as a file, then create as directory
+if [ -f "$CONFIG_INSTALL_PATH" ]; then
+    rm -f "$CONFIG_INSTALL_PATH"
+fi
+mkdir -p "$CONFIG_INSTALL_PATH"
 cp "$SRC_CONFIG_FILE" "$CONFIG_INSTALL_PATH"
 
 # Create log directory for status log
