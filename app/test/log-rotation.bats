@@ -27,7 +27,7 @@ teardown() {
     cat > "$TEST_CONFIG" <<EOF
 LOG_DIR="$TEST_LOG_DIR"
 OWN_LOG="$TEST_STATUS_LOG"
-ZIP_USER="$(whoami)"
+LOGMANAGER_USER="$(whoami)"
 DELEGATED_USER=""
 SIZE_WARNING_THRESHOLD_MB=100
 ZIP_RETENTION_DAYS=14
@@ -39,14 +39,14 @@ EOF
     
     [ "$status" -eq 0 ]
     [ ! -f "$TEST_LOG_DIR/test.log" ]
-    [ -f "$TEST_LOG_DIR"/*.zip ]
+    [ $(find "$TEST_LOG_DIR" -name "*.zip" | wc -l) -gt 0 ]
 }
 
 @test "Creates status log file" {
     cat > "$TEST_CONFIG" <<EOF
 LOG_DIR="$TEST_LOG_DIR"
 OWN_LOG="$TEST_STATUS_LOG"
-ZIP_USER="$(whoami)"
+LOGMANAGER_USER="$(whoami)"
 SIZE_WARNING_THRESHOLD_MB=100
 ZIP_RETENTION_DAYS=14
 EOF
@@ -64,7 +64,7 @@ EOF
     cat > "$TEST_CONFIG" <<EOF
 LOG_DIR="$TEST_LOG_DIR"
 OWN_LOG="$TEST_STATUS_LOG"
-ZIP_USER="unauthorizeduser"
+LOGMANAGER_USER="unauthorizeduser"
 SIZE_WARNING_THRESHOLD_MB=100
 ZIP_RETENTION_DAYS=14
 EOF
@@ -79,7 +79,7 @@ EOF
     cat > "$TEST_CONFIG" <<EOF
 LOG_DIR="/some/other/path"
 OWN_LOG="$TEST_STATUS_LOG"
-ZIP_USER="$(whoami)"
+LOGMANAGER_USER="$(whoami)"
 SIZE_WARNING_THRESHOLD_MB=100
 ZIP_RETENTION_DAYS=14
 EOF

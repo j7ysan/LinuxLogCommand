@@ -6,12 +6,20 @@
 
 set -o pipefail 
 
-# SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SCRIPT_DIR="."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source "$SCRIPT_DIR/util.sh"
 source "$SCRIPT_DIR/functions.sh"
 
+# Default configuration
+DEFAULT_CONFIG="/course_project/log.cfg"
+CONFIG_FILE="$DEFAULT_CONFIG"
+LOG_DIR="/course_project/log"
+OWN_LOG="/var/log/logrotate_status.log"
+LOGMANAGER_USER="logmanager"
+DELEGATED_USER=""
+SIZE_WARNING_THRESHOLD_MB=100
+ZIP_RETENTION_DAYS=14
 
 show_usage() {
     cat << EOF
@@ -84,27 +92,27 @@ parse_arguments() {
                 shift 2
                 ;;
             -d|--dir)
-                LOG_DIR="$2"
+                CLI_LOG_DIR="$2"
                 shift 2
                 ;;
             -l|--log)
-                OWN_LOG="$2"
+                CLI_OWN_LOG="$2"
                 shift 2
                 ;;
             -u|--user)
-                LOGMANAGER_USER="$2"
+                CLI_LOGMANAGER_USER="$2"
                 shift 2
                 ;;
             -t|--threshold)
-                SIZE_WARNING_THRESHOLD_MB="$2"
+                CLI_SIZE_WARNING_THRESHOLD_MB="$2"
                 shift 2
                 ;;
             -r|--retention)
-                ZIP_RETENTION_DAYS="$2"
+                CLI_ZIP_RETENTION_DAYS="$2"
                 shift 2
                 ;;
             -D|--delegate)
-                DELEGATED_USER="$2"
+                CLI_DELEGATED_USER="$2"
                 shift 2
                 ;;
             -h|--help)
@@ -118,6 +126,15 @@ parse_arguments() {
                 ;;
         esac
     done
+}
+
+apply_cli_overrides() {
+    [[ -n "$CLI_LOG_DIR" ]] && LOG_DIR="$CLI_LOG_DIR"
+    [[ -n "$CLI_OWN_LOG" ]] && OWN_LOG="$CLI_OWN_LOG"
+    [[ -n "$CLI_LOGMANAGER_USER" ]] && LOGMANAGER_USER="$CLI_LOGMANAGER_USER"
+    [[ -n "$CLI_SIZE_WARNING_THRESHOLD_MB" ]] && SIZE_WARNING_THRESHOLD_MB="$CLI_SIZE_WARNING_THRESHOLD_MB"
+    [[ -n "$CLI_ZIP_RETENTION_DAYS" ]] && ZIP_RETENTION_DAYS="$CLI_ZIP_RETENTION_DAYS"
+    [[ -n "$CLI_DELEGATED_USER" ]] && DELEGATED_USER="$CLI_DELEGATED_USER"
 }
 
 load_configuration() {
@@ -209,6 +226,7 @@ check_size_warning() {
 main() {
     parse_arguments "$@"
     load_configuration
+    apply_cli_overrides
     validate_authorization
     initialize_environment
     
