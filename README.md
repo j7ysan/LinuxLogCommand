@@ -3,7 +3,7 @@
 The purpose of this project is to present a command in Linux that showcases
 logs, filters logs, cleans logs, and more depending on their timestamp, size, etc.
 
-## What It Does
+### What It Does
 Automatically zips .log files in a set folder every 2 days.
 
 Deletes zipped logs that are older than 14 days.
@@ -23,7 +23,7 @@ The installation process is automated using the `install.sh` script, which perfo
 1. Clone or download this repository.
 2. Run: `sudo ./install.sh`.
 
-## Configuration
+### Configuration
 There’s a file called log.cfg where you set things like:
 
 Where the logs are stored (LOG_DIR)
@@ -55,7 +55,7 @@ bats log-rotation.bats
 
 ### Usage
 
-## Logs Included
+### Logs Included
 This repo includes sample logs (sample.log, application.log, etc.) for testing the script.
 
 #### View Logs
