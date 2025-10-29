@@ -12,7 +12,8 @@ Type=oneshot
 User=logmanager
 Group=logmanager
 WorkingDirectory=/course_project
-ExecStart=/usr/local/bin/log-rotate.sh
+ExecStart=/usr/local/bin/log-rotation.sh
 StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=log-rotation
+

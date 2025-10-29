@@ -4,7 +4,14 @@
 
 set -e
 
-CONFIG_FILE="./app/resources/log.cfg"
+SRC_CONFIG_FILE="./app/resources/log.cfg"
+SRC_DEPLOYMENT_DIR="./app/deployment/etc/"
+SRC_CODE_DIR="./app/src/"
+
+INSTALL_PATH="/usr/local/bin/log-rotation"
+CONFIG_INSTALL_PATH="/etc/log-rotation"
+CONFIG_FILE_NAME="log.cfg"
+CONFIG_FILE_PATH="$CONFIG_INSTALL_PATH/$CONFIG_FILE_NAME"
 
 # Check if running as root
 if [[ $EUID -ne 0 ]]; then
@@ -13,19 +20,14 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Read configuration
-if [[ ! -f "$CONFIG_FILE" ]]; then
-    echo "Error: Configuration file not found: $CONFIG_FILE"
-    exit 1
-fi
-
-source "$CONFIG_FILE"
+source "$SRC_CONFIG_FILE"
 
 echo "Starting installation..."
 
 # Create user if doesn't exist
-if ! id "$ZIP_USER" &>/dev/null; then
-    echo "Creating user '$ZIP_USER'..."
-    useradd -r -s /bin/bash "$ZIP_USER"
+if ! id "$LOGMANAGER_USER" &>/dev/null; then
+    echo "Creating user '$LOGMANAGER_USER'..."
+    useradd -r -s /bin/bash "$LOGMANAGER_USER"
 fi
 
 # Create directories
@@ -33,32 +35,23 @@ mkdir -p "$LOG_DIR"
 
 # Copy deployment files
 echo "Copying system files..."
-cp -r "./app/deployment/etc/" /
+cp -r "$SRC_DEPLOYMENT_DIR" /
 
 # Copy scripts
 echo "Installing log rotation scripts..."
-cp "./app/src/util.sh" /usr/local/bin/
-cp "./app/src/functions.sh" /usr/local/bin/
-cp "./app/src/log-rotation.sh" /usr/local/bin/
-chmod +x /usr/local/bin/util.sh
-chmod +x /usr/local/bin/functions.sh
-chmod +x /usr/local/bin/log-rotation.sh
+cp "$SRC_CODE_DIR/*.sh" "$INSTALL_PATH/"
+chmod +x "$INSTALL_PATH/*.sh"
 
-# Copy config if doesn't exist
-CONFIG_INSTALL_PATH="/course_project/log.cfg"
-if [[ ! -f "$CONFIG_INSTALL_PATH" ]]; then
-    cp "./app/resources/log.cfg" "$CONFIG_INSTALL_PATH"
-fi
+# Copy config
+cp "$SRC_CONFIG_FILE" "$CONFIG_INSTALL_PATH"
 
 # Create log directory for status log
 mkdir -p /var/log
 
 # Set ownership
-chown -R "$ZIP_USER:$ZIP_USER" "$LOG_DIR"
-chown "$ZIP_USER:$ZIP_USER" "$CONFIG_INSTALL_PATH"
-chown "$ZIP_USER:$ZIP_USER" /usr/local/bin/util.sh
-chown "$ZIP_USER:$ZIP_USER" /usr/local/bin/functions.sh
-chown "$ZIP_USER:$ZIP_USER" /usr/local/bin/log-rotation.sh
+chown -R "$LOGMANAGER_USER:$LOGMANAGER_USER" "$LOG_DIR"
+chown -R "$LOGMANAGER_USER:$LOGMANAGER_USER" "$INSTALL_PATH/"
+chown "$LOGMANAGER_USER:$LOGMANAGER_USER" "$CONFIG_INSTALL_PATH"
 
 # Reload and start systemd timer
 echo "Enabling systemd timer..."
