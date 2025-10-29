@@ -1,0 +1,24 @@
+##
+## Timer configuration for log rotation service
+## This timer triggers the log-rotation.service at midnight every 2 days
+##
+[Unit]
+Description=Timer for CIS-341 Log Rotation Service (runs every 2 days at midnight)
+Requires=log-rotation.service
+
+[Timer]
+# Run every 2 days at midnight
+# The format is: DayOfWeek Year-Month-Day Hour:Minute:Second
+# Using */2 means every 2 days
+OnCalendar=00:00:00
+# Set the interval to every 48 hours (2 days)
+OnUnitActiveSec=48h
+# Run 10 minutes after boot if the system was off during scheduled time
+OnBootSec=10min
+# If the system was off when timer should have triggered, run it on next boot
+Persistent=true
+# Allow up to 1 hour variance for accuracy
+AccuracySec=1h
+
+[Install]
+WantedBy=timers.target
