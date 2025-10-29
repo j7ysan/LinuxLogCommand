@@ -1,0 +1,8 @@
+Oct 26 08:00:00 server nginx: 192.168.1.10 - - [26/Oct/2025:08:00:00 +0000] "GET / HTTP/1.1" 200 612
+Oct 26 08:15:30 server nginx: 192.168.1.20 - - [26/Oct/2025:08:15:30 +0000] "POST /api/login HTTP/1.1" 200 156
+Oct 26 08:30:45 server nginx: 192.168.1.30 - - [26/Oct/2025:08:30:45 +0000] "GET /static/style.css HTTP/1.1" 200 2048
+Oct 26 08:45:12 server nginx: 192.168.1.40 - - [26/Oct/2025:08:45:12 +0000] "GET /api/users HTTP/1.1" 200 4523
+Oct 26 09:00:00 server nginx: 192.168.1.50 - - [26/Oct/2025:09:00:00 +0000] "DELETE /api/sessions/123 HTTP/1.1" 204 0
+Oct 26 09:15:20 server nginx: 192.168.1.60 - - [26/Oct/2025:09:15:20 +0000] "PUT /api/users/456 HTTP/1.1" 200 234
+Oct 26 09:30:50 server nginx: 192.168.1.70 - - [26/Oct/2025:09:30:50 +0000] "GET /favicon.ico HTTP/1.1" 404 152
+Oct 26 09:45:15 server nginx: 192.168.1.80 - - [26/Oct/2025:09:45:15 +0000] "GET /health HTTP/1.1" 200 15

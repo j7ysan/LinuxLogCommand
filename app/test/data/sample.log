@@ -1,0 +1,50 @@
+Oct 28 00:00:01 server systemd[1]: Starting System Logging Service...
+Oct 28 00:00:01 server systemd[1]: Started System Logging Service.
+Oct 28 00:15:23 server kernel: [  123.456789] eth0: link up
+Oct 28 00:30:45 server sshd[1234]: Accepted publickey for admin from 192.168.1.100 port 54321 ssh2
+Oct 28 00:45:12 server cron[5678]: (root) CMD (/usr/local/bin/backup.sh)
+Oct 28 01:00:00 server systemd[1]: Starting Daily rotation of log files...
+Oct 28 01:00:01 server systemd[1]: logrotate.service: Succeeded.
+Oct 28 01:00:01 server systemd[1]: Finished Daily rotation of log files.
+Oct 28 01:15:33 server kernel: [  456.789012] usb 1-1: new high-speed USB device number 2 using xhci_hcd
+Oct 28 01:30:44 server NetworkManager[987]: <info>  [1698451844.123] device (eth0): carrier: link connected
+Oct 28 02:00:00 server systemd[1]: Starting Cleanup of Temporary Directories...
+Oct 28 02:00:01 server systemd[1]: systemd-tmpfiles-clean.service: Succeeded.
+Oct 28 02:15:22 server sshd[2345]: pam_unix(sshd:session): session opened for user admin by (uid=0)
+Oct 28 02:30:11 server sudo: admin : TTY=pts/0 ; PWD=/home/admin ; USER=root ; COMMAND=/bin/systemctl status nginx
+Oct 28 02:45:55 server nginx[3456]: 192.168.1.100 - - [28/Oct/2025:02:45:55 +0000] "GET /api/health HTTP/1.1" 200 15
+Oct 28 03:00:00 server CRON[4567]: (root) CMD (test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily ))
+Oct 28 03:15:44 server systemd[1]: Starting Daily apt download activities...
+Oct 28 03:30:22 server kernel: [  789.012345] oom_reaper: reaped process 5678 (java), now anon-rss:0kB
+Oct 28 03:45:11 server systemd-logind[888]: New session 42 of user admin.
+Oct 28 04:00:00 server systemd[1]: Starting Update UTMP about System Runlevel Changes...
+Oct 28 04:15:33 server postgres[6789]: [42-1] LOG:  checkpoint starting: time
+Oct 28 04:30:44 server postgres[6789]: [42-2] LOG:  checkpoint complete: wrote 15 buffers (0.1%)
+Oct 28 04:45:12 server systemd[1]: Starting Daily man-db regeneration...
+Oct 28 05:00:00 server kernel: [  901.234567] EXT4-fs (sda1): mounted filesystem with ordered data mode
+Oct 28 05:15:22 server systemd[1]: Starting Daily apt upgrade and clean activities...
+Oct 28 05:30:11 server cron[7890]: (CRON) INFO (pidfile fd = 3)
+Oct 28 05:45:33 server systemd[1]: apt-daily-upgrade.service: Succeeded.
+Oct 28 06:00:00 server sshd[8901]: Received disconnect from 192.168.1.100 port 54321:11: disconnected by user
+Oct 28 06:15:44 server systemd[1]: Starting Docker Application Container Engine...
+Oct 28 06:30:22 server dockerd[9012]: time="2025-10-28T06:30:22.123456789Z" level=info msg="API listen on /var/run/docker.sock"
+Oct 28 06:45:11 server kernel: [  912.345678] docker0: port 1(veth123abc) entered blocking state
+Oct 28 07:00:00 server systemd[1]: Starting Daily Cleanup of Snap Revisions...
+Oct 28 07:15:33 server snapd[1023]: task.go:190: DEBUG: Purging unused snaps...
+Oct 28 07:30:44 server systemd[1]: snap-remove-old-revisions.service: Succeeded.
+Oct 28 07:45:12 server systemd-resolved[1111]: Server returned error NXDOMAIN, mitigating potential DNS violation DVE-2018-0001
+Oct 28 08:00:00 server systemd[1]: Starting Message of the Day...
+Oct 28 08:15:22 server systemd[1]: motd-news.service: Succeeded.
+Oct 28 08:30:11 server sshd[2222]: Invalid user testuser from 192.168.1.200 port 12345
+Oct 28 08:45:33 server sshd[2222]: Connection closed by invalid user testuser 192.168.1.200 port 12345 [preauth]
+Oct 28 09:00:00 server kernel: [  934.567890] audit: type=1400 audit(1698458400.123:456): apparmor="DENIED"
+Oct 28 09:15:44 server systemd[1]: Started User Manager for UID 1000.
+Oct 28 09:30:22 server dbus-daemon[3333]: [system] Activating service name='org.freedesktop.hostname1'
+Oct 28 09:45:11 server systemd[1]: Starting Hostname Service...
+Oct 28 10:00:00 server systemd[1]: Started Hostname Service.
+Oct 28 10:15:33 server NetworkManager[987]: <info>  [1698462933.456] dhcp4 (eth0): option ip_address => 192.168.1.50
+Oct 28 10:30:44 server systemd[1]: Stopping User Manager for UID 1000...
+Oct 28 10:45:12 server systemd[1]: Stopped User Manager for UID 1000.
+Oct 28 11:00:00 server systemd[1]: Starting Daily dpkg database backup...
+Oct 28 11:15:22 server systemd[1]: dpkg-db-backup.service: Succeeded.
+Oct 28 11:30:11 server kernel: [  945.678901] perf: interrupt took too long (2512 > 2500), lowering kernel.perf_event_max_sample_rate to 79000
