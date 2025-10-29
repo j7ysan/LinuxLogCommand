@@ -19,7 +19,8 @@ echo "To install BATS for macOS: brew install bats-core"
 echo "To install BATS for Linux: sudo apt install bats"
 echo " "
 echo "Program USAGE: bats log-rotation.bats"
-echo "USAGE: -c, --config FILE - Configuration file path"
+echo "USAGE: "
+echo "-c, --config FILE - Configuration file path"
 echo "-d, --dir DIR - Log directory to process"
 echo "-l, --log FILE - Status log file path"
 echo "-u, --user USER - Allowed user"
@@ -54,8 +55,8 @@ cp -r "$SRC_DEPLOYMENT_DIR" /
 
 # Copy scripts
 echo "Installing log rotation scripts..."
-cp "$SRC_CODE_DIR/*.sh" "$INSTALL_PATH/"
-chmod +x "$INSTALL_PATH/*.sh"
+cp "$SRC_CODE_DIR"*.sh "$INSTALL_PATH/"
+chmod +x "$INSTALL_PATH/"*.sh
 
 # Copy config
 cp "$SRC_CONFIG_FILE" "$CONFIG_INSTALL_PATH"
@@ -75,4 +76,5 @@ systemctl enable log-rotation.timer
 systemctl restart log-rotation.timer
 
 echo "Installation complete!"
+echo " "
 systemctl status log-rotation.timer --no-pager | head -n 10
