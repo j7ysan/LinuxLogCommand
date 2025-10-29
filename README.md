@@ -10,6 +10,27 @@ The installation process is automated using the `install.sh` script, which perfo
 1. Clone or download this repository.
 2. Run: `sudo ./install.sh`.
 
+### Testing
+
+The project includes automated tests using BATS.
+
+**Prerequisites:** Install BATS
+```bash
+# macOS
+brew install bats-core
+
+# Linux
+sudo apt install bats
+```
+
+**Run tests:**
+```bash
+cd app/test
+bats log-rotation.bats
+```
+
+### Usage
+
 #### View Logs
 
 ```bash
