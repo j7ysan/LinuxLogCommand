@@ -1,0 +1,18 @@
+##
+## CIS-341 Log Rotation Service - Systemd Service Unit
+## This service is triggered by log-rotation.timer to perform log rotation tasks.
+## See README.md for installation and usage instructions.
+##
+[Unit]
+Description=CIS-341 Log Rotation Service Project
+After=local-fs.target
+
+[Service]
+Type=oneshot
+User=logmanager
+Group=logmanager
+WorkingDirectory=/course_project
+ExecStart=/usr/local/bin/log-rotate.sh
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=log-rotation
